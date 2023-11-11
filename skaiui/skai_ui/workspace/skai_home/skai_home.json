@@ -1,0 +1,33 @@
+{
+ "charts": [],
+ "content": "[]",
+ "creation": "2023-11-08 01:27:37.269318",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "color-review-points",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "SKAI Home",
+ "links": [],
+ "modified": "2023-11-11 16:10:26.190709",
+ "modified_by": "Administrator",
+ "module": "SKAI UI",
+ "name": "SKAI Home",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "Employee"
+  }
+ ],
+ "sequence_id": 1.0,
+ "shortcuts": [],
+ "title": "SKAI Home"
+}

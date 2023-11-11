@@ -1,0 +1,9 @@
+.DS_Store
+*.pyc
+*.egg-info
+*.swp
+tags
+node_modules
+skaiui/public/dist
+node_modules/
+__pycache__

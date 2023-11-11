@@ -1,0 +1,56 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-11-08 12:18:07.535714",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "dummy"
+ ],
+ "fields": [
+  {
+   "default": "Dummy",
+   "description": "Dummy Field required to show SKAI UI Workspace in sidebar.",
+   "fieldname": "dummy",
+   "fieldtype": "Read Only",
+   "label": "SKAI UI",
+   "options": "Dummy"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-11-08 12:23:07.040253",
+ "modified_by": "Administrator",
+ "module": "SKAI UI",
+ "name": "SKAI UI Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Employee",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
