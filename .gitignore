@@ -7,3 +7,4 @@ node_modules
 skaiui/public/dist
 node_modules/
 __pycache__
+skaiui/www/element

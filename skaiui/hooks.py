@@ -14,6 +14,8 @@ app_logo_url = "/assets/skaiui/images/skai-logo.svg"
 # app_include_css = "/assets/skaiui/css/skaiui.css"
 app_include_js = "skaiui.bundle.js"
 
+page_renderer = "skaiui.renderer.ElementPage"
+
 # include js, css files in header of web template
 # web_include_css = "/assets/skaiui/css/skaiui.css"
 # web_include_js = "/assets/skaiui/js/skaiui.js"
