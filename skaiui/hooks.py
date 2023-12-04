@@ -71,7 +71,7 @@ page_renderer = "skaiui.renderer.ElementPage"
 # ------------
 
 # before_install = "skaiui.install.before_install"
-after_install = "skaiui.install.add_element"
+# after_install = "skaiui.install.add_element"
 
 # Uninstallation
 # ------------

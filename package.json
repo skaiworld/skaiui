@@ -4,6 +4,10 @@
   "description": "SKAI UI Frappe App",
   "author": "SKAI technologies",
   "license": "GPL-3.0",
+  "scripts": {
+    "build": "/bin/bash setup.sh",
+    "production": "/bin/bash setup.sh"
+  },
   "dependencies": {
     "@capacitor/core": "^5.5.1",
     "@capacitor/geolocation": "^5.0.6",
