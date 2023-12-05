@@ -8,6 +8,9 @@ import frappe
 from frappe.website.page_renderers.static_page import StaticPage
 from frappe.website.utils import build_response
 
+# Todo: Not used. element routing is in nginx config.
+# Todo: Better route element here for more control?
+
 class ElementPage(StaticPage):
     def set_file_path(self):
         self.file_path = ''

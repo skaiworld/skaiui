@@ -4,7 +4,7 @@ app_publisher = "SKAI Technologies"
 app_description = "SKAI ERP - Enhanced User Interface"
 app_email = "info@skaiworld.com"
 app_license = "GNU General Public License (v3)"
-required_apps = ["frappe/erpnext", "frappe/payments", "frappe/hrms"]
+required_apps = ["frappe/erpnext", "frappe/payments", "frappe/hrms", "frappe/wiki", "resilient-tech/india-compliance"]
 app_logo_url = "/assets/skaiui/images/skai-logo.svg"
 
 # Includes in <head>
