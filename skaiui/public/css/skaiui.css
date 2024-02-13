@@ -1,0 +1,49 @@
+[data-route="Workspaces/SKAI Home"] #editorjs {
+	display: none;
+}
+
+#skai-dash {
+	min-height: 630px;
+}
+
+.sk-filter.collapsed {
+	height: 0px;
+	overflow: hidden;
+	opacity: 0;
+}
+
+.sk-wiki-link {
+	position: absolute;
+	right: 0;
+	bottom: calc(100% + 5px);
+	color: var(--blue-700);
+	font-size: var(--text-sm);
+}
+
+@media (max-width: 767px) {
+	.page-head {
+		margin-bottom: 0;
+	}
+
+	.page-head .page-head-content {
+		height: 44px;
+	}
+
+	.nav {
+		overflow: auto;
+		flex-wrap: nowrap;
+	}
+
+	.form-tabs-sticky-down {
+		top: 0;
+	}
+
+	[data-route^=List] .btn[data-label^=Add] {
+		position: fixed;
+		bottom: 1rem;
+		right: 1rem;
+		width: 40px;
+		height: 40px;
+		border-radius: 20px;
+	}
+}

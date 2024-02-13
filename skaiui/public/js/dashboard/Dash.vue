@@ -58,11 +58,6 @@ async function checkOutNow() {
 				</div>
 			</Card>
 		</div>
-		<div class="col-lg-6 col-sm-12">
-			<Card>
-				Coming soon
-			</Card>
-		</div>
 	</div>
 </template>
 
