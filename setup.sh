@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version=v1.11.76
+version=v1.11.77
 wpath=skaiui/www
 eurl=https://github.com/vector-im/element-web/releases/download/$version/element-$version.tar.gz
 
