@@ -201,3 +201,7 @@ export function setLocalJson(key, val) {
 	const item = JSON.stringify(val)
 	localStorage.setItem(key, item)
 }
+
+export function generatePassword() {
+	return Math.random().toString(36).slice(2, 8)
+}

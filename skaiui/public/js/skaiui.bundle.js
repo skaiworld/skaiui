@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
 import Dash from "./dashboard/Dash.vue";
-import { prepareSkaiMe } from './dashboard/utils';
+import { prepareSkaiMe, generatePassword } from './dashboard/utils';
 
 import { Mobile } from './mobile'
 
@@ -16,7 +16,7 @@ class SkaiUI {
 	}
 
 	setup() {
-		const onFrappeReady = () => {
+		const onFrappeStart = () => {
 			// Define Capacitor custom elements.
 			defineCustomElements( window )
 
@@ -35,16 +35,14 @@ class SkaiUI {
 		}
 
 		const onPageChange = () => {
-			if ( 'workspace' in frappe && frappe.user.has_role( 'Desk User' ) ) {
-				this.setSkaiDash()
-				this.toggleSkaiDash()
-			}
-
+			this.onContainer()
+			this.onSidebarChat()
 			this.setWikiLinks()
+			this.setChatUserForm()
 		}
 
 		$( document ).on( 'startup', () => {
-			setTimeout( onFrappeReady, 0 )
+			setTimeout( onFrappeStart, 0 )
 		} )
 
 		$( document ).on( 'page-change', () => {
@@ -52,13 +50,28 @@ class SkaiUI {
 		} )
 	}
 
+	onContainer() {
+		if ( ! frappe.container ) {
+			setTimeout( this.onContainer.bind(this), 100 ); return
+		}
+
+		if ( 'workspace' in frappe && frappe.user.has_role( 'Desk User' ) ) {
+			this.setSkaiDash()
+			this.toggleSkaiDash()
+		}
+	}
+
+	onSidebarChat() {
+		const chatLink = $( '.sidebar-item-container a[title=Chat]' )
+		if ( chatLink.length === 0 ) {
+			setTimeout( this.onSidebarChat.bind(this), 100 ); return
+		}
+
+		chatLink.attr( 'href', '/element/' ).attr( 'target', '_blank' )
+	}
+
 	setSkaiDash() {
 		if ( $( '#skai-dash' ).length ) return
-
-		if ( ! frappe.container ) {
-			setTimeout( this.setSkaiDash, 100 )
-			return
-		}
 
 		const dashSection = $( '<div id="skai-dash"></div>' )
 		$( '#page-Workspaces .layout-main-section' ).prepend( dashSection )
@@ -78,9 +91,64 @@ class SkaiUI {
 		if ( cur_page.page.label !== 'Wiki Page' || ! ( 'route' in cur_frm.doc ) ) return
 
 		const route = cur_frm.$wrapper.find( `input[data-fieldname='route']` )
-		if ( route.length && ! cur_frm.wrapper.querySelector( '.sk-wiki-link' ) ) {
+		if ( route.length ) {
+			const link = cur_frm.wrapper.querySelector( '.sk-wiki-link' )
+			link && link.remove()
 			route.after(`<a href="/${ route.val() }" target="_blank" class="sk-wiki-link">View Page</a>`)
 		}
+	}
+
+	setChatUserForm() {
+		if ( cur_page.page?.frm?.doctype !== 'User' ) return
+		const tab = $( '#user-user_details_tab' )
+		const abc = tab.find( '#chat-user-form' )
+		if ( abc.length ) return
+		tab.append( `<div id="chat-user-form" style="padding: 15px 5px; display:flex;">
+			<div class="form-column col-sm-4">
+				<label class="control-label">Access Token (from /element > Help & About)</label>
+				<input id="access-token" type="password" class="token form-control" style="margin-bottom: 10px;" />
+				<button id="create-chat-user" class="btn btn-primary btn-sm">
+					Create Chat User
+				</button>
+			</div>
+		</div>` )
+		$( '#create-chat-user' ).on( 'click', this.createChatUser )
+	}
+
+	createChatUser() {
+		const un = cur_frm?.selected_doc?.username
+		if ( ! un ) {
+			frappe.show_alert({
+				indicator: 'orange',
+				message: __( 'Check username' ),
+				subtitle: __( 'Username should be set before creating chat user.' ),
+			}, 10);
+			return
+		}
+		const body = {
+			password: generatePassword(),
+			displayname: cur_frm.selected_doc.full_name,
+			threepids: [ { medium: "email", address: cur_frm.selected_doc.email } ]
+		}
+		if ( cur_frm.selected_doc.phone ) {
+			body.threepids.push( { medium: "msisdn", address: `91${ cur_frm.selected_doc.phone }` } )
+		}
+		if ( cur_frm.selected_doc.mobile_no ) {
+			body.threepids.push( { medium: "msisdn", address: `91${ cur_frm.selected_doc.mobile_no }` } )
+		}
+
+		fetch( `${ location.protocol }//localhost${ location.protocol === 'http:' ? ':8008' : '' }/_synapse/admin/v2/users/@${ un }:${ location.hostname }`, {
+			method: 'PUT',
+			body: JSON.stringify( body ),
+			headers: {
+				'Authorization': `Bearer ${ $( '#access-token' ).val() }`,
+				'Content-Type': 'application/json'
+			},
+		} ).then( x => x.json() ).then( d => {
+			$( '#user-user_details_tab' ).append( `<div>Created. Username: ${ un } , Password: ${ body.password } </div>` )
+		} ).catch( e => {
+			$( '#user-user_details_tab' ).append( '<div>Could not create user. Contact Admin.</div>' )
+		} )
 	}
 }
 
