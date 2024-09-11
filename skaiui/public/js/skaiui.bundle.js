@@ -104,24 +104,27 @@ class SkaiUI {
 		const abc = tab.find( '#chat-user-form' )
 		if ( abc.length ) return
 		tab.append( `<div id="chat-user-form" style="padding: 15px 5px; display:flex;">
-			<div class="form-column col-sm-4">
-				<label class="control-label">Access Token (from /element > Help & About)</label>
+			<div class="form-column col-sm-12">
+				<label class="control-label">Access Token (from Chat > Settings > Help & About)</label>
+				✦ <a href="/element/" target="_blank">Open Chat in new tab</a>
 				<input id="access-token" type="password" class="token form-control" style="margin-bottom: 10px;" />
 				<button id="create-chat-user" class="btn btn-primary btn-sm">
 					Create Chat User
 				</button>
 			</div>
-		</div>` )
+		</div>
+		<div id="chat-result" style="padding: 0 20px 10px;"></div>` )
 		$( '#create-chat-user' ).on( 'click', this.createChatUser )
 	}
 
 	createChatUser() {
 		const un = cur_frm?.selected_doc?.username
-		if ( ! un ) {
+		const token = $( '#access-token' ).val()
+		if ( ! un || ! token ) {
 			frappe.show_alert({
 				indicator: 'orange',
-				message: __( 'Check username' ),
-				subtitle: __( 'Username should be set before creating chat user.' ),
+				message: __( 'Check fields' ),
+				subtitle: __( 'Username and Token must be set.' ),
 			}, 10);
 			return
 		}
@@ -141,13 +144,18 @@ class SkaiUI {
 			method: 'PUT',
 			body: JSON.stringify( body ),
 			headers: {
-				'Authorization': `Bearer ${ $( '#access-token' ).val() }`,
+				'Authorization': `Bearer ${ token }`,
 				'Content-Type': 'application/json'
 			},
 		} ).then( x => x.json() ).then( d => {
-			$( '#user-user_details_tab' ).append( `<div>Created. Username: ${ un } , Password: ${ body.password } </div>` )
+			console.log(d)
+			if ( d.error ) {
+				$( '#chat-result' ).text( d.error ); return
+			}
+			$( '#chat-result' ).text( `Created. Username: ${ un } , Password: ${ body.password }` )
 		} ).catch( e => {
-			$( '#user-user_details_tab' ).append( '<div>Could not create user. Contact Admin.</div>' )
+			console.log(d)
+			$( '#chat-result' ).text( 'Could not create user. Contact Admin.' )
 		} )
 	}
 }
