@@ -140,7 +140,7 @@ class SkaiUI {
 			body.threepids.push( { medium: "msisdn", address: `91${ cur_frm.selected_doc.mobile_no }` } )
 		}
 
-		fetch( `${ location.protocol }//localhost${ location.protocol === 'http:' ? ':8008' : '' }/_synapse/admin/v2/users/@${ un }:${ location.hostname }`, {
+		fetch( `${ location.protocol }//${ location.hostname }${ location.protocol === 'http:' ? ':8008' : '' }/_synapse/admin/v2/users/@${ un }:${ location.hostname }`, {
 			method: 'PUT',
 			body: JSON.stringify( body ),
 			headers: {
@@ -154,7 +154,7 @@ class SkaiUI {
 			}
 			$( '#chat-result' ).text( `Created. Username: ${ un } , Password: ${ body.password }` )
 		} ).catch( e => {
-			console.log(d)
+			console.log(e)
 			$( '#chat-result' ).text( 'Could not create user. Contact Admin.' )
 		} )
 	}

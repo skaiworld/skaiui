@@ -20,6 +20,11 @@ TLDR:
   - Format: `user/repo`, `repo` naming: https://github.com/frappe/bench/blob/v5.x/bench/utils/app.py#L225
 9. Once development is complete, push to Github and tag, eg: v1.0.0
 
+### Todo
+- Remote Backup and restore
+- Remote bench build
+- Remote bench migrate (or any bench command?)
+
 #### License
 
 GPL v3.0
