@@ -18,6 +18,13 @@ def skai_restore(context, site=''):
 	click.secho('Running bench restore {}'.format(max(flist)), fg="yellow")
 	subprocess.run('bench restore {}'.format(max(flist)), shell=True)
 
+@click.command('skai-backup')
+def skai_backup():
+	click.secho('Backing up now')
+	subprocess.getoutput('bench backup')
+	click.secho('Back up complete')
+
 commands = [
-	skai_restore
+	skai_restore,
+	skai_backup,
 ]

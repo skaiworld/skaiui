@@ -11,7 +11,8 @@ app_logo_url = "/assets/skaiui/images/skai-logo.svg"
 # ------------------
 
 # include js, css files in header of desk.html
-app_include_css = "/assets/skaiui/css/skaiui.css"
+#app_include_css = "/assets/skaiui/css/skaiui.css"
+app_include_css = ["tailwind.bundle.css", "skaiui.bundle.css"]
 app_include_js = "skaiui.bundle.js"
 
 # page_renderer = "skaiui.renderer.ElementPage"

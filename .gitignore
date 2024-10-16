@@ -8,3 +8,4 @@ skaiui/public/dist
 node_modules/
 __pycache__
 skaiui/www/element
+skaiui/public/css/tailwind.bundle.css

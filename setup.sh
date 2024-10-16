@@ -1,5 +1,7 @@
 #!/bin/bash
 
+npx tailwindcss -i ./skaiui/public/css/tailwind.css -o ./skaiui/public/css/tailwind.bundle.css --minify;
+
 version=v1.11.77
 wpath=skaiui/www
 eurl=https://github.com/vector-im/element-web/releases/download/$version/element-$version.tar.gz

@@ -12,6 +12,7 @@ TLDR:
 4. First time - Setup bench, Create new site, Install this app
 5. In Subsequent runs: `cd frappe-bench`
 6. In terminal, run `bench start`
+7. Run `npx tailwindcss -i ./skaiui/public/css/tailwind.css -o ./skaiui/public/css/tailwind.bundle.css --minify` if tailwind css changes are made.
 7. Open [localhost:8000](localhost:8000)
 8. Add dependent apps if needed.
   - `bench get-app repo`,  `repo` naming: https://github.com/frappe/bench/blob/v5.x/bench/app.py#L53

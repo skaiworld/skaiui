@@ -1,10 +1,10 @@
 import { createApp } from "vue";
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
-import Dash from "./dashboard/Dash.vue";
-import { prepareSkaiMe, generatePassword } from './dashboard/utils';
+import Dash from "./components/Dash.vue";
+import { prepareSkaiMe, generatePassword } from './services/utils';
 
-import { Mobile } from './mobile'
+import { Mobile } from './services/mobile'
 
 class SkaiUI {
 	constructor() {

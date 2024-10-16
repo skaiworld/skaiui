@@ -1,11 +1,11 @@
 <template>
-	<div class="flex flex-col rounded-lg border bg-white px-4 py-3 mb-10 shadow">
+	<div class="flex flex-column rounded-lg border bg-white px-4 py-6 mb-6 shadow">
 		<div class="flex items-baseline justify-between">
 			<div class="flex items-baseline space-x-2">
 				<div class="flex items-center space-x-2" v-if="$slots['actions-left']">
 					<slot name="actions-left"></slot>
 				</div>
-				<h2 class="text-xl font-semibold">{{ title }}</h2>
+				<h2 class="text-xl font-semibold m-0 text-slate-500">{{ title }}</h2>
 			</div>
 			<div class="flex items-center space-x-2" v-if="$slots['actions']">
 				<slot name="actions"></slot>
@@ -22,9 +22,7 @@
 		</div>
 	</div>
 </template>
-<script>
-export default {
-	name: 'Card',
-	props: ['title', 'subtitle', 'loading']
-}
+
+<script setup>
+const { title, subtitle, loading } = defineProps(['title', 'subtitle', 'loading'])
 </script>
