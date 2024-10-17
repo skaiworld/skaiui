@@ -17,6 +17,7 @@ def create_contact():
 		if frappe.db.exists(body['type'], full_name):
 			return f"{full_name} already exists"
 		contact.name = full_name
+		contact.mobile_no = body['phone']
 		contact.gst_category = 'Unregistered'
 		if body['type'] == 'Customer':
 			contact.customer_name = full_name
@@ -30,7 +31,7 @@ def create_contact():
 		note = frappe.new_doc('CRM Note')
 		note.note = body['note']
 		note.parent = contact.name
-		note.parentfield = 'notes' if (body['type'] == 'Lead') else 'custom_notes'
+		note.parentfield = 'notes'
 		note.parenttype = body['type']
 		note.added_by = frappe.session.user
 		note.insert()

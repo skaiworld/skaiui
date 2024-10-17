@@ -1,5 +1,5 @@
 <template>
-	<Card title="My Tasks" :loading="tasks.length === 0">
+	<Card title="My Tasks" :loading="!tasks">
 		<div class="max-h-40 overflow-auto">
 			<a :href="`/app/task/${ task.name }`" class="relative no-underline group flex items-center py-2 hover:bg-slate-100 transition rounded-sm" v-for="task in tasks">
 				<div class="w-2 h-2 rounded border-solid border-2 mr-2" :style="{ borderColor: task.color }"></div>
@@ -34,7 +34,7 @@ import Loading from "./Loading.vue";
 import { sleep } from '../services/utils'
 import { fetchTasks, createTask } from '../services/api'
 
-const tasks = ref([])
+const tasks = ref(false)
 const subject = ref('')
 const assign = ref(true)
 const creating = ref(false)
