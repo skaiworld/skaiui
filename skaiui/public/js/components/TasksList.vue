@@ -1,9 +1,9 @@
 <template>
 	<Card title="My Tasks" :loading="!tasks">
 		<div class="max-h-40 overflow-auto">
-			<a :href="`/app/task/${ task.name }`" class="relative no-underline group flex items-center py-2 hover:bg-slate-100 transition rounded-sm" v-for="task in tasks">
+			<a :href="`/app/task/${ task.name }`" class="relative no-underline group flex items-center py-2 pr-9 hover:bg-slate-100 transition rounded-sm" v-for="task in tasks">
 				<div class="w-2 h-2 rounded border-solid border-2 mr-2" :style="{ borderColor: task.color }"></div>
-				<div>{{ task.subject }}</div>
+				<div class="overflow-hidden whitespace-nowrap text-ellipsis">{{ task.subject }}</div>
 				<div class="px-2 ml-2 bg-slate-400 text-slate-200 text-xs rounded-sm absolute right-0">{{ task.priority }}</div>
 				<div class="text-slate-500 ml-2 opacity-0 group-hover:opacity-100 transition">❯</div>
 			</a>

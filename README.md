@@ -12,7 +12,6 @@ TLDR:
 4. First time - Setup bench, Create new site, Install this app
 5. In Subsequent runs: `cd frappe-bench`
 6. In terminal, run `bench start`
-7. Run `npx tailwindcss -i ./skaiui/public/css/tailwind.css -o ./skaiui/public/css/tailwind.bundle.css --minify` if tailwind css changes are made.
 7. Open [localhost:8000](localhost:8000)
 8. Add dependent apps if needed.
   - `bench get-app repo`,  `repo` naming: https://github.com/frappe/bench/blob/v5.x/bench/app.py#L53
@@ -20,6 +19,14 @@ TLDR:
   - Add dependent apps entry under `hooks.py` > `required_apps`
   - Format: `user/repo`, `repo` naming: https://github.com/frappe/bench/blob/v5.x/bench/utils/app.py#L225
 9. Once development is complete, push to Github and tag, eg: v1.0.0
+
+### Development - Others
+- Run `npx tailwindcss -i ./skaiui/public/css/tailwind.css -o ./skaiui/public/css/tailwind.bundle.css --minify` if tailwind css changes are made.
+- Add custom fields to other doctypes
+  - https://frappeframework.com/docs/user/en/guides/app-development/how-to-create-custom-fields-during-app-installation
+  - Add custom fields in UI: Doctype > Customize
+  - Add `fixtures = ["Custom Field"]` under `hooks.py`
+  - Run `bench --site mysite export-fixtures`
 
 ### Todo
 - Remote Backup and restore
