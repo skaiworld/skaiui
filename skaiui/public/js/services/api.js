@@ -111,3 +111,8 @@ export async function createContact( data ) {
 	} )
 	return await r.json()
 }
+
+export async function archiveTasks( data ) {
+	const r = await fetch( '/api/method/skaiui.api.archive_tasks' )
+	return await r.json()
+}

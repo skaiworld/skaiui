@@ -1,5 +1,8 @@
 <template>
 	<Card title="My Tasks" :loading="!tasks">
+		<template #actions>
+			<a href="/app/task/view/kanban/All Tasks">Board <svg class="es-icon es-line icon-xs"><use href="#es-line-arrow-up-right"></use></svg></a>
+		</template>
 		<div class="max-h-40 overflow-auto">
 			<a :href="`/app/task/${ task.name }`" class="relative no-underline group flex items-center py-2 pr-9 hover:bg-slate-100 transition rounded-sm" v-for="task in tasks">
 				<div class="w-2 h-2 rounded border-solid border-2 mr-2" :style="{ borderColor: task.color }"></div>

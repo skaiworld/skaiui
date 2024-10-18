@@ -183,3 +183,11 @@ export function generatePassword() {
 export async function sleep(s) {
 	return new Promise( r => setTimeout(r, s * 1000) )
 }
+
+export function runOnceReady( condition, cb, expiry ) {
+	if ( condition() === false ) {
+		if ( expiry <= 0 ) return
+		setTimeout( () => runOnceReady( condition, cb, expiry - 100 ), 100 ); return
+	}
+	cb()
+}

@@ -1,6 +1,6 @@
 <template>
 	<div class="flex flex-column rounded-lg border bg-white px-4 py-6 mb-6 shadow">
-		<div class="flex items-baseline justify-between">
+		<div class="flex items-center justify-between mb-2" v-if="title || $slots['actions-left'] || $slots['actions']">
 			<div class="flex items-baseline space-x-2">
 				<div class="flex items-center space-x-2" v-if="$slots['actions-left']">
 					<slot name="actions-left"></slot>
@@ -11,13 +11,13 @@
 				<slot name="actions"></slot>
 			</div>
 		</div>
-		<p class="mt-1.5 text-base text-gray-600" v-if="subtitle">
+		<p class="mb-2 text-base text-gray-600" v-if="subtitle">
 			{{ subtitle }}
 		</p>
 		<div v-if="loading" class="mt-4 flex flex-auto flex-col items-center justify-center rounded-md">
 			Loading ...
 		</div>
-		<div class="mt-2 flex-auto overflow-auto" v-else-if="$slots['default']">
+		<div class="flex-auto" v-else-if="$slots['default']">
 			<slot></slot>
 		</div>
 	</div>

@@ -20,6 +20,17 @@
 	font-size: var(--text-sm);
 }
 
+
+.kanban {
+	width: calc(100vw - 28px);
+	margin-left: 50%;
+	transform: translate(-50%, 0);
+
+	.kanban-column {
+		min-width: 0;
+	}
+}
+
 @media (max-width: 767px) {
 	.page-head {
 		margin-bottom: 0;

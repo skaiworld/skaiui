@@ -2,7 +2,8 @@ import { createApp } from "vue";
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
 import Dash from "./components/Dash.vue";
-import { prepareSkaiMe, generatePassword } from './services/utils';
+import { prepareSkaiMe, generatePassword, runOnceReady } from './services/utils';
+import { archiveTasks } from './services/api';
 
 import { Mobile } from './services/mobile'
 
@@ -39,6 +40,7 @@ class SkaiUI {
 			this.onSidebarChat()
 			this.setWikiLinks()
 			this.setChatUserForm()
+			this.createKanbanButtons()
 		}
 
 		$( document ).on( 'startup', () => {
@@ -157,6 +159,24 @@ class SkaiUI {
 			console.log(e)
 			$( '#chat-result' ).text( 'Could not create user. Contact Admin.' )
 		} )
+	}
+
+	createKanbanButtons() {
+		if ( ( cur_page?.page?.label !== 'List/Task/Kanban/All Tasks' ) || ! ( cur_list instanceof frappe.views.KanbanView ) ) return
+
+		const archive = async () => {
+			const r = await archiveTasks()
+			if ( 'message' in r ) {
+				cur_list.refresh()
+				frappe.show_alert( r.message )
+			}
+		}
+
+		runOnceReady( () => cur_list?.page?.add_menu_item !== undefined, () => {
+			cur_list.page.add_menu_item( 'Archive Old Tasks', () => {
+				archive()
+			} )
+		}, 10000 )
 	}
 }
 

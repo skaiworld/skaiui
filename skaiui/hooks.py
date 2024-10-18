@@ -139,8 +139,9 @@ app_include_js = "skaiui.bundle.js"
 
 scheduler_events = {
 	"daily_long": [
-		"skaiui.backup.backup"
-	]
+		"skaiui.api.backup",
+		"skaiui.api.archive_tasks",
+	],
 }
 
 # scheduler_events = {

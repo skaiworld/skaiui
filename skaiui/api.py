@@ -1,6 +1,13 @@
 import json
 import frappe
 
+TASK_ARCHIVE_DAYS = 7
+
+@frappe.whitelist()
+def backup():
+	from frappe.utils.backups import new_backup
+	new_backup(ignore_files=False, force=True)
+
 @frappe.whitelist()
 def create_contact():
 	body = json.loads(frappe.request.data)
@@ -37,3 +44,20 @@ def create_contact():
 		note.insert()
 
 	return f"Contact {body['first']} {body['last']} created"
+
+@frappe.whitelist()
+def archive_tasks():
+	from frappe.utils.data import getdate, add_to_date
+
+	last_week = add_to_date( getdate(), days=-1 * TASK_ARCHIVE_DAYS )
+
+	frappe.db.sql(f"""UPDATE tabTask
+		SET status = 'Archived'
+		WHERE status in ('Completed', 'Cancelled')
+		AND modified < '{ last_week }'""")
+	frappe.db.commit()
+	return 'Archived'
+
+@frappe.whitelist()
+def get_logged_roles():
+	return frappe.get_roles(frappe.session.user)
