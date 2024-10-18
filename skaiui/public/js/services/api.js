@@ -25,6 +25,7 @@ export async function checkInNow( args ) {
 		headers: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json',
+			'X-Frappe-CSRF-Token': frappe.csrf_token,
 		},
 		body: JSON.stringify( args )
 	} )
@@ -65,8 +66,9 @@ export async function createTask( subject = '', assign = true ) {
 	const r = await fetch( '/api/resource/Task', {
 		method: 'POST',
 		headers: {
-			"Accept": "application/json",
-			"Content-Type": "application/json",
+			'Accept': 'application/json',
+			'Content-Type': 'application/json',
+			'X-Frappe-CSRF-Token': frappe.csrf_token,
 		},
 		body: JSON.stringify( body )
 	} )
@@ -92,7 +94,10 @@ export async function assignMeTask(task) {
 	const assignFetch = ( b ) => {
 		return fetch( '/api/method/frappe.desk.form.assign_to.add', {
 			method: 'PUT',
-			headers: { "Content-Type": "application/json" },
+			headers: {
+				'Content-Type': 'application/json',
+				'X-Frappe-CSRF-Token': frappe.csrf_token,
+			},
 			body: JSON.stringify( b )
 		} )
 	}
@@ -106,7 +111,10 @@ export async function assignMeTask(task) {
 export async function createContact( data ) {
 	const r = await fetch( '/api/method/skaiui.api.create_contact', {
 		method: 'POST',
-		headers: { "Content-Type": "application/json" },
+		headers: {
+			'Content-Type': 'application/json',
+			'X-Frappe-CSRF-Token': frappe.csrf_token,
+		},
 		body: JSON.stringify( data )
 	} )
 	return await r.json()
